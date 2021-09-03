@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="base_button_h">50dp</dimen>
+    <dimen name="base_button_w">150dp</dimen>
+</resources>

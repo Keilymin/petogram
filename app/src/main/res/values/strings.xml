@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">PetO\'Gram</string>
+    <string name="app_name">PetOGram</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="non_account">Don’t have an account?</string>
+    <string name="sing_up">Sing up</string>
+    <string name="log_in">Log in</string>
+    <string name="email_error_message">Email is`t correct</string>
+    <string name="ok">OK</string>
+    <string name="empty"> </string>
 </resources>
