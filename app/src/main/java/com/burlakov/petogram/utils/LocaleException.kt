@@ -11,7 +11,7 @@ class LocaleException(viewState: MessageView) {
         viewState.showMessage("$message ${exception.localizedMessage}", false)
 
         if (viewState is SingUpView){
-            viewState.enableSingUpButton(true)
+            viewState.enableButton(true)
         }
     }
 }

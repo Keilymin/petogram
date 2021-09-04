@@ -8,5 +8,5 @@ import moxy.viewstate.strategy.StateStrategyType
 
 interface SingUpView : MvpView, MessageView {
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun enableSingUpButton(isPositive: Boolean)
+    fun enableButton(isPositive: Boolean)
 }

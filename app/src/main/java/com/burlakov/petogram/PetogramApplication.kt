@@ -1,18 +1,17 @@
 package com.burlakov.petogram
 
 import android.app.Application
-import com.burlakov.petogram.services.SingUpService
+import com.burlakov.petogram.services.UserService
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 
 
 class PetogramApplication : Application() {
     companion object {
-        lateinit var singUpService: SingUpService
+        lateinit var userService: UserService
     }
 
     override fun onCreate() {
@@ -23,7 +22,7 @@ class PetogramApplication : Application() {
 
     private fun configureRetrofit() {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BASIC
+        httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val spec = listOf(ConnectionSpec.CLEARTEXT, ConnectionSpec.MODERN_TLS)
 
@@ -39,7 +38,7 @@ class PetogramApplication : Application() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        singUpService = retrofit.create(SingUpService::class.java)
+        userService = retrofit.create(UserService::class.java)
     }
 
 

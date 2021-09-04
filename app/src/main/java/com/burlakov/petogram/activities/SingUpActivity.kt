@@ -2,6 +2,7 @@ package com.burlakov.petogram.activities
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
 import com.burlakov.petogram.R
@@ -40,8 +41,14 @@ class SingUpActivity : MvpAppCompatActivity(), SingUpView {
 
         EmailValidator.setValidateMaterialEditView(email, this)
         singUp.setOnClickListener {
-            enableSingUpButton(false)
-            singUpPresenter.singUp("1", "1")
+            if (email.validate()) {
+                if (password.length()>=6) {
+
+                    singUp.isEnabled = false
+                    singUpPresenter.singUp(email.text.toString(), password.text.toString())
+
+                } else showMessage(getString(R.string.password_error_message), false)
+            } else showMessage(getString(R.string.email_error_message), false)
         }
     }
 
@@ -50,13 +57,14 @@ class SingUpActivity : MvpAppCompatActivity(), SingUpView {
         dialog.show(supportFragmentManager, "message")
     }
 
-    override fun enableSingUpButton(isPositive: Boolean) {
+    override fun enableButton(isPositive: Boolean) {
         singUp.isEnabled = isPositive
     }
 
-    override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
-        super.onSaveInstanceState(outState, outPersistentState)
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
         outState.putBoolean("isEnabled", singUp.isEnabled)
+        Log.e("B", singUp.isEnabled.toString())
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
