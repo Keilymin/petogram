@@ -9,6 +9,7 @@ import com.burlakov.petogram.R
 import com.burlakov.petogram.dialogs.MessageDialog
 import com.burlakov.petogram.presenter.SingUpPresenter
 import com.burlakov.petogram.utils.EmailValidator
+import com.burlakov.petogram.utils.LocalizeUtil
 import com.burlakov.petogram.view.SingUpView
 import com.rengwuxian.materialedittext.MaterialEditText
 import kotlinx.coroutines.GlobalScope
@@ -53,7 +54,7 @@ class SingUpActivity : MvpAppCompatActivity(), SingUpView {
     }
 
     override fun showMessage(message: String, isPositive: Boolean) {
-        val dialog = MessageDialog().newInstance(message, isPositive)
+        val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message,this), isPositive)
         dialog.show(supportFragmentManager, "message")
     }
 

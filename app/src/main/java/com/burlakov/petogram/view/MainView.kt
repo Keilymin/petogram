@@ -5,10 +5,9 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.SingleStateStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
-interface LogInView : SingUpView {
+interface MainView : MessageView {
     @StateStrategyType(SingleStateStrategy::class)
-    fun goToMain(user: User)
-
+    fun userDataError(message: String)
     @StateStrategyType(AddToEndSingleStrategy::class)
-    fun resetPassword(email: String)
+    fun saveUser(user: User)
 }

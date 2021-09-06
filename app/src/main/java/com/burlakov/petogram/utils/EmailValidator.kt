@@ -3,6 +3,7 @@ package com.burlakov.petogram.utils
 import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Button
 import com.burlakov.petogram.R
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
@@ -50,6 +51,31 @@ class EmailValidator(errorMessage: String) : METValidator(errorMessage) {
 
                 override fun afterTextChanged(s: Editable) {
                     email.validate()
+                }
+            })
+        }
+
+        fun setValidateMaterialEditViewAndButton(email: MaterialEditText,button: Button, context: Context) {
+            val validator =
+                EmailValidator(context.getString(R.string.email_error_message))
+            email.addValidator(validator)
+            email.validate()
+            email.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+                override fun afterTextChanged(s: Editable) {
+                    button.isEnabled = email.validate()
+
                 }
             })
         }

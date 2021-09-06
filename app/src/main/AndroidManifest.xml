@@ -16,15 +16,16 @@
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.PetOGram.NoActionBar"></activity>
-        <activity android:name=".activities.SingUpActivity" />
-        <activity android:name=".activities.LogInActivity">
+            android:theme="@style/Theme.PetOGram.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activities.SingUpActivity" />
+        <activity android:name=".activities.LogInActivity" />
+
     </application>
 
 </manifest>

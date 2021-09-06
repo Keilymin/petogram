@@ -9,6 +9,17 @@
     <string name="password_error_message">Password must be between 6 and 24 characters</string>
     <string name="ok">OK</string>
     <string name="empty"> </string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="restore">Restore</string>
+    <string name="cancel">Cancel</string>
+    <string name="not_registered">Account with this email has not registered</string>
+    <string name="wrong_password">Email or password is`t correct</string>
+    <string name="password_changed_error">Password has been changed, please login again</string>
+    <string name="message_password_restore_send">A restore message has been sent to your mail</string>
+    <string name="acc_is_not_activate">Please confirm mail first. Follow the link in the letter that came to your mail</string>
+    <string name="registred"> </string>
+
+
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

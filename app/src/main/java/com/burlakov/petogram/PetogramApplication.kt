@@ -1,6 +1,9 @@
 package com.burlakov.petogram
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import com.burlakov.petogram.model.User
 import com.burlakov.petogram.services.UserService
 import okhttp3.ConnectionSpec
 import okhttp3.OkHttpClient
@@ -10,14 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class PetogramApplication : Application() {
+
     companion object {
         lateinit var userService: UserService
+        var user: User? = null
+
     }
 
     override fun onCreate() {
         super.onCreate()
 
         configureRetrofit()
+        getCurrentUser()
     }
 
     private fun configureRetrofit() {
@@ -41,5 +48,21 @@ class PetogramApplication : Application() {
         userService = retrofit.create(UserService::class.java)
     }
 
-
+    private fun getCurrentUser() {
+        val pref = this.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val id = pref.getLong("id", -1)
+        if (id != -1L) {
+            user = User(
+                pref.getString("email", "")!!,
+                pref.getString("password", "")!!
+            )
+            user?.id = id
+            user?.active = true
+            user?.verificationCode = null
+            val username = pref.getString("username", "")
+            if (!username.equals("")) {
+                user?.username = username
+            }
+        }
+    }
 }

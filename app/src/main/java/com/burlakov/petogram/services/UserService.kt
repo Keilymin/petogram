@@ -12,4 +12,10 @@ interface UserService {
 
     @POST("/logIn")
     suspend fun logIn(@Body user: User): Answer
+
+    @POST("/checkUser")
+    suspend fun checkUser(@Body user: User): Answer
+
+    @POST("/forgotPassword")
+    suspend fun forgotPassword(@Body email: String): Answer
 }
