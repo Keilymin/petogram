@@ -1,6 +1,7 @@
 package com.burlakov.petogram.presenter
 
 
+import android.util.Log
 import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.utils.LocaleException
 import com.burlakov.petogram.view.MainView
@@ -25,6 +26,11 @@ class MainPresenter : MvpPresenter<MainView>() {
         } else {
             if (!(answer.user!!.equals(PetogramApplication.user!!))) {
               viewState.saveUser(answer.user!!)
+            }
+            if (curUser.username==null){
+                viewState.toSetUsername()
+            } else{
+                viewState.setAvatarAndUserData()
             }
         }
 

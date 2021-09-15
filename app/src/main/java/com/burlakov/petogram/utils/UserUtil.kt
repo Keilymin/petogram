@@ -13,14 +13,14 @@ class UserUtil {
             editor.putLong("id", user.id!!)
             editor.putString("password", user.password)
             editor.putString("email", user.email)
+            user.avatar.let { editor.putString("avatar", user.avatar) }
             user.username.let { editor.putString("username", user.username) }
 
             editor.apply()
         }
 
         public fun clear(context: Context) {
-            val pref =
-                context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
+            context.getSharedPreferences("user_data", Context.MODE_PRIVATE)
                     .edit().clear().apply()
         }
     }

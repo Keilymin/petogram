@@ -10,4 +10,8 @@ interface MainView : MessageView {
     fun userDataError(message: String)
     @StateStrategyType(AddToEndSingleStrategy::class)
     fun saveUser(user: User)
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun toSetUsername()
+    @StateStrategyType(AddToEndSingleStrategy::class)
+    fun setAvatarAndUserData()
 }

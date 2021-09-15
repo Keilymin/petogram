@@ -3,34 +3,40 @@ package com.burlakov.petogram.activities
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import android.view.TextureView
+import android.view.View
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.bumptech.glide.Glide
 import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.R
 import com.burlakov.petogram.dialogs.MessageDialog
 import com.burlakov.petogram.model.User
-import com.burlakov.petogram.presenter.LogInPresenter
 import com.burlakov.petogram.presenter.MainPresenter
 import com.burlakov.petogram.utils.LocalizeUtil
 import com.burlakov.petogram.utils.UserUtil
 import com.burlakov.petogram.view.MainView
+import com.google.android.material.navigation.NavigationView
+import de.hdodenhof.circleimageview.CircleImageView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
+
 class MainActivity : MvpAppCompatActivity(), MainView {
+
 
     private val mainPresenter by moxyPresenter { MainPresenter() }
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var image: CircleImageView
+    private lateinit var email: TextView
+    private lateinit var username: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,40 +47,33 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         } else mainPresenter.userDataIsOk()
 
 
-
         setContentView(R.layout.activity_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val fab: FloatingActionButton = findViewById(R.id.fab)
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
+
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home, R.id.nav_settings
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+        val hView: View = navView.getHeaderView(0)
+        image = hView.findViewById(R.id.image)
+        email = hView.findViewById(R.id.email)
+        username = hView.findViewById(R.id.username)
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-        
+
     }
 
     override fun userDataError(message: String) {
@@ -85,11 +84,35 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun saveUser(user: User) {
+        PetogramApplication.user = user
         UserUtil.saveUser(user, this)
     }
 
+    override fun toSetUsername() {
+        val intent = Intent(this, UsernameActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun setAvatarAndUserData() {
+        val user = PetogramApplication.user
+
+        email.text = user!!.email
+        username.text = user.username
+
+        Glide.with(this).load("${PetogramApplication.baseUrl}images/${user.id}/${user.avatar}").into(
+            image
+        )
+    }
+
     override fun showMessage(message: String, isPositive: Boolean) {
-        val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message,this), isPositive)
+        val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message, this), isPositive)
         dialog.show(supportFragmentManager, "message")
+    }
+
+    override fun onBackPressed() {
+        val a = Intent(Intent.ACTION_MAIN)
+        a.addCategory(Intent.CATEGORY_HOME)
+        a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(a)
     }
 }
