@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.burlakov.petogram.R
+import com.burlakov.petogram.dialogs.MessageDialog
+import com.burlakov.petogram.utils.LocalizeUtil
+import com.burlakov.petogram.view.SettingsView
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : Fragment(), SettingsView {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,7 +18,15 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
-
+        showMessage("hello", true)
         return root
+    }
+
+    override fun showMessage(message: String, isPositive: Boolean) {
+        val dialog = MessageDialog().newInstance(
+            LocalizeUtil.localize(message, requireContext()),
+            isPositive
+        )
+        dialog.show(childFragmentManager, "message")
     }
 }

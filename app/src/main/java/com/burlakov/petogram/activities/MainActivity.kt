@@ -2,10 +2,9 @@ package com.burlakov.petogram.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.TextureView
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
@@ -24,14 +23,12 @@ import com.burlakov.petogram.utils.UserUtil
 import com.burlakov.petogram.view.MainView
 import com.google.android.material.navigation.NavigationView
 import de.hdodenhof.circleimageview.CircleImageView
-import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
 
 
-class MainActivity : MvpAppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity(), MainView {
 
 
-    private val mainPresenter by moxyPresenter { MainPresenter() }
+    private lateinit var mainPresenter: MainPresenter
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var image: CircleImageView
@@ -40,7 +37,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mainPresenter = MainPresenter(this)
         if (PetogramApplication.user == null) {
             val intent = Intent(this, LogInActivity::class.java)
             startActivity(intent)

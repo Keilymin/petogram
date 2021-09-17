@@ -7,29 +7,27 @@ import com.burlakov.petogram.view.LogInView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import moxy.InjectViewState
-import moxy.MvpPresenter
 
-@InjectViewState
-class LogInPresenter : MvpPresenter<LogInView>() {
+class LogInPresenter(val viewState: LogInView) {
     val handler = LocaleException(viewState).handler
 
-    fun logIn(email: String, password: String) = CoroutineScope(Dispatchers.Main).launch(handler) {
+     fun logIn(email: String, password: String) = CoroutineScope(Dispatchers.Main).launch(handler) {
 
         val answer = PetogramApplication.userService.logIn(User(email, password))
 
-        if (answer.user==null) {
+        if (answer.user == null) {
             viewState.showMessage(
                 answer.message, answer.isPositive
             )
         } else {
             viewState.goToMain(answer.user!!)
         }
-        viewState.enableButton(true)
+         viewState.enableButton(true)
 
     }
-    fun resetPassword(email: String) = CoroutineScope(Dispatchers.Default).launch(handler) {
+
+     fun resetPassword(email: String) = CoroutineScope(Dispatchers.Default).launch(handler) {
         val answer = PetogramApplication.userService.forgotPassword(email)
-        viewState.showMessage(answer.message,answer.isPositive)
+         viewState.showMessage(answer.message, answer.isPositive)
     }
 }

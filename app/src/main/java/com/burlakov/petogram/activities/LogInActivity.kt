@@ -3,9 +3,9 @@ package com.burlakov.petogram.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.R
 import com.burlakov.petogram.dialogs.ForgotPasswordDialog
@@ -17,13 +17,11 @@ import com.burlakov.petogram.utils.LocalizeUtil
 import com.burlakov.petogram.utils.UserUtil
 import com.burlakov.petogram.view.LogInView
 import com.rengwuxian.materialedittext.MaterialEditText
-import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
 
 
-class LogInActivity : MvpAppCompatActivity(), LogInView {
+class LogInActivity : AppCompatActivity(), LogInView {
 
-    private val logInPresenter by moxyPresenter { LogInPresenter() }
+    private lateinit var logInPresenter: LogInPresenter
 
     private lateinit var singUp: TextView
     private lateinit var forgotPassword: TextView
@@ -36,6 +34,8 @@ class LogInActivity : MvpAppCompatActivity(), LogInView {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_login)
+
+        logInPresenter = LogInPresenter(this)
 
         email = findViewById(R.id.editTextEmailAddress)
         password = findViewById(R.id.editTextPassword)
@@ -85,7 +85,7 @@ class LogInActivity : MvpAppCompatActivity(), LogInView {
     }
 
     override fun showMessage(message: String, isPositive: Boolean) {
-        val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message,this), isPositive)
+        val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message, this), isPositive)
         dialog.show(supportFragmentManager, "message")
     }
 }

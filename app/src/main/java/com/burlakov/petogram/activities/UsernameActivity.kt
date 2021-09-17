@@ -9,6 +9,7 @@ import android.text.TextWatcher
 import android.webkit.MimeTypeMap
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.Glide
@@ -19,14 +20,12 @@ import com.burlakov.petogram.utils.LocalizeUtil
 import com.burlakov.petogram.view.UsernameView
 import com.rengwuxian.materialedittext.MaterialEditText
 import de.hdodenhof.circleimageview.CircleImageView
-import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
 import org.apache.commons.io.FileUtils
 import java.io.File
 import java.io.FileOutputStream
 
 
-class UsernameActivity : MvpAppCompatActivity(), UsernameView {
+class UsernameActivity : AppCompatActivity(), UsernameView {
 
     lateinit var save: Button
     lateinit var load: Button
@@ -34,13 +33,13 @@ class UsernameActivity : MvpAppCompatActivity(), UsernameView {
     lateinit var image: CircleImageView
     private var imageUri: Uri? = null
 
-    private val usernamePresenter by moxyPresenter { UsernamePresenter() }
+    lateinit var usernamePresenter: UsernamePresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_username)
-
+        usernamePresenter = UsernamePresenter(this)
         save = findViewById(R.id.buttonSave)
         load = findViewById(R.id.buttonLoad)
         username = findViewById(R.id.editTextUsername)
@@ -106,6 +105,7 @@ class UsernameActivity : MvpAppCompatActivity(), UsernameView {
         val dialog = MessageDialog().newInstance(LocalizeUtil.localize(message, this), isPositive)
         dialog.show(supportFragmentManager, "message")
     }
+
     override fun onBackPressed() {
         val a = Intent(Intent.ACTION_MAIN)
         a.addCategory(Intent.CATEGORY_HOME)

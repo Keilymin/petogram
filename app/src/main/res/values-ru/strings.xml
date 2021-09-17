@@ -25,4 +25,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="home">Главная</string>
     <string name="settings">Настройки</string>
+    <string name="change_pass">Изменить пароль</string>
+    <string name="change_name">Изменить логин</string>
+    <string name="change_mail">Изменить эл. почту</string>
+    <string name="change_avatar">Изменить аватар</string>
 </resources>

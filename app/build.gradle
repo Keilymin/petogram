@@ -53,13 +53,6 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation group: 'commons-validator', name: 'commons-validator', version: '1.7'
 
-    //Moxy
-    implementation 'com.github.moxy-community:moxy:2.2.2'
-    kapt 'com.github.moxy-community:moxy-compiler:2.2.2'
-    implementation 'com.github.moxy-community:moxy-android:2.2.2'
-    implementation 'com.github.moxy-community:moxy-androidx:2.2.2'
-    implementation "com.github.moxy-community:moxy-ktx:2.2.2"
-
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'

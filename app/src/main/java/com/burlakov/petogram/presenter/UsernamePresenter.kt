@@ -1,26 +1,20 @@
 package com.burlakov.petogram.presenter
 
-import android.net.Uri
-import androidx.core.net.toFile
 import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.utils.LocaleException
 import com.burlakov.petogram.view.UsernameView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import moxy.InjectViewState
-import moxy.MvpPresenter
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import org.apache.commons.io.FileUtils
 import java.io.File
-import java.io.InputStream
 
 
-@InjectViewState
-class UsernamePresenter : MvpPresenter<UsernameView>() {
+class UsernamePresenter(
+    val viewState: UsernameView
+) {
     val handler = LocaleException(viewState).handler
 
     fun saveImageAndUsername(image: File, username: String) =
