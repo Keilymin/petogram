@@ -29,6 +29,10 @@ class LocalizeUtil {
                     result = context.getString(R.string.wrong_password)
                     return result
                 }
+                "Saved" -> {
+                    result = context.getString(R.string.registred)
+                    return result
+                }
             }
             return string
         }

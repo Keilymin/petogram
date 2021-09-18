@@ -7,11 +7,9 @@ import com.burlakov.petogram.view.MainView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import moxy.InjectViewState
-import moxy.MvpPresenter
 
-@InjectViewState
-class MainPresenter : MvpPresenter<MainView>() {
+
+class MainPresenter(val viewState: MainView) {
     val handler = LocaleException(viewState).handler
 
     fun userDataIsOk() = CoroutineScope(Dispatchers.Main).launch(handler) {
@@ -24,7 +22,12 @@ class MainPresenter : MvpPresenter<MainView>() {
             viewState.userDataError(answer.message)
         } else {
             if (!(answer.user!!.equals(PetogramApplication.user!!))) {
-              viewState.saveUser(answer.user!!)
+                viewState.saveUser(answer.user!!)
+            }
+            if (curUser.username == null) {
+                viewState.toSetUsername()
+            } else {
+                viewState.setAvatarAndUserData()
             }
         }
 

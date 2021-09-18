@@ -17,7 +17,7 @@ class PetogramApplication : Application() {
     companion object {
         lateinit var userService: UserService
         var user: User? = null
-
+        val baseUrl : String = "http://192.168.50.237:8080/"
     }
 
     override fun onCreate() {
@@ -40,7 +40,7 @@ class PetogramApplication : Application() {
 
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.1.68:8080/")
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -62,6 +62,10 @@ class PetogramApplication : Application() {
             val username = pref.getString("username", "")
             if (!username.equals("")) {
                 user?.username = username
+            }
+            val avatar = pref.getString("avatar", "")
+            if (!avatar.equals("")) {
+                user?.avatar = avatar
             }
         }
     }

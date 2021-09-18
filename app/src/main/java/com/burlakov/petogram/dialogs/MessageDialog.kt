@@ -16,8 +16,7 @@ import com.burlakov.petogram.R
 /**
  * Базовый диалог для показа сообщений пользователю
  */
-class MessageDialog :
-    DialogFragment() {
+class MessageDialog : DialogFragment() {
 
     lateinit var imageView: ImageView
     lateinit var textView: TextView

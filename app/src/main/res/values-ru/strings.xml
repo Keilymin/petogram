@@ -17,17 +17,25 @@
     <string name="password_changed_error">Пароль был изменен, пожалуйстра войдите снова</string>
     <string name="message_password_restore_send">На почту было отправлено сообщение для востановления пароля</string>
     <string name="acc_is_not_activate">Пожалуйста сначала подтвердите адрес электронной почты. Перейдите по ссылке что пришла вам на почту</string>
-    <string name="registred">You have been registered. An email has been sent to you</string>
-
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="registred">Вы были зарегистрированы. Сообщение отправлено на вашу почту</string>
+    <string name="username">Логин</string>
+    <string name="load">Загрузить</string>
+    <string name="save">Сохранить</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="home">Главная</string>
+    <string name="settings">Настройки</string>
+    <string name="change_pass">Изменить пароль</string>
+    <string name="change_name">Изменить логин</string>
+    <string name="change_mail">Изменить эл. почту</string>
+    <string name="change_avatar">Изменить аватар</string>
+    <string name="old_pass">Старый пароль</string>
+    <string name="new_pass">Новый пароль</string>
+    <string name="avatar_changed">Аватар был изменен</string>
+    <string name="username_changed">Логин был изменен</string>
+    <string name="password_changed">Пароль был изменен</string>
+    <string name="password_change_error">Не верно введен текущий пароль</string>
+    <string name="email_sended_for_change">Пожалуйста подтвердите письмо на своей новой почте</string>
+    <string name="mail_exist">Такая почта уже занята</string>
+    <string name="log_out">Выйти</string>
 </resources>

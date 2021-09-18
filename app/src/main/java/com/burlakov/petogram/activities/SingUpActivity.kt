@@ -1,9 +1,9 @@
 package com.burlakov.petogram.activities
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.burlakov.petogram.R
 import com.burlakov.petogram.dialogs.MessageDialog
@@ -12,25 +12,21 @@ import com.burlakov.petogram.utils.EmailValidator
 import com.burlakov.petogram.utils.LocalizeUtil
 import com.burlakov.petogram.view.SingUpView
 import com.rengwuxian.materialedittext.MaterialEditText
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import moxy.MvpAppCompatActivity
-import moxy.ktx.moxyPresenter
 
 
-class SingUpActivity : MvpAppCompatActivity(), SingUpView {
+class SingUpActivity : AppCompatActivity(), SingUpView {
 
     lateinit var email: MaterialEditText
     lateinit var password: MaterialEditText
     lateinit var singUp: Button
 
-    private val singUpPresenter by moxyPresenter { SingUpPresenter() }
+    lateinit var singUpPresenter : SingUpPresenter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sing_up)
-
+        singUpPresenter = SingUpPresenter(this)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
