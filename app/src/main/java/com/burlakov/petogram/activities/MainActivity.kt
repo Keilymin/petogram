@@ -13,6 +13,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.R
 import com.burlakov.petogram.dialogs.MessageDialog
@@ -96,9 +98,15 @@ class MainActivity : AppCompatActivity(), MainView {
         email.text = user!!.email
         username.text = user.username
 
-        Glide.with(this).load("${PetogramApplication.baseUrl}images/${user.id}/${user.avatar}").into(
-            image
-        )
+        val requestOptions = RequestOptions()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+
+        Glide.with(this).load("${PetogramApplication.baseUrl}images/${user.id}/${user.avatar}")
+            .apply(requestOptions)
+            .into(
+                image
+            )
     }
 
     override fun showMessage(message: String, isPositive: Boolean) {

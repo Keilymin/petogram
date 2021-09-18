@@ -9,6 +9,8 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 
 
@@ -20,24 +22,18 @@ class UsernamePresenter(
     fun saveImageAndUsername(image: File, username: String) =
         CoroutineScope(Dispatchers.Main).launch(handler) {
 
-            val requestFile = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                image
-            )
+            val requestFile = image
+                .asRequestBody("multipart/form-data".toMediaTypeOrNull())
 
             val part = MultipartBody.Part.createFormData(
                 "image", image.name, requestFile
             )
             val curUser = PetogramApplication.user
             curUser?.username = username
-            val requestUserId = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                curUser?.id.toString()
-            )
-            val requestUsername = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(),
-                curUser?.username!!
-            )
+            val requestUserId = curUser?.id.toString()
+                .toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val requestUsername = curUser?.username!!
+                .toRequestBody("multipart/form-data".toMediaTypeOrNull())
             val answer = PetogramApplication.userService.loadImageAndUsername(
                 requestUserId,
                 requestUsername,

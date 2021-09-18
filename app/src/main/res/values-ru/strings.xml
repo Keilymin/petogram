@@ -29,4 +29,13 @@
     <string name="change_name">Изменить логин</string>
     <string name="change_mail">Изменить эл. почту</string>
     <string name="change_avatar">Изменить аватар</string>
+    <string name="old_pass">Старый пароль</string>
+    <string name="new_pass">Новый пароль</string>
+    <string name="avatar_changed">Аватар был изменен</string>
+    <string name="username_changed">Логин был изменен</string>
+    <string name="password_changed">Пароль был изменен</string>
+    <string name="password_change_error">Не верно введен текущий пароль</string>
+    <string name="email_sended_for_change">Пожалуйста подтвердите письмо на своей новой почте</string>
+    <string name="mail_exist">Такая почта уже занята</string>
+    <string name="log_out">Выйти</string>
 </resources>

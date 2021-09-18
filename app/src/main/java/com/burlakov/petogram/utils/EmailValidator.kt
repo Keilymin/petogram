@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
+import com.burlakov.petogram.PetogramApplication
 import com.burlakov.petogram.R
 import com.rengwuxian.materialedittext.MaterialEditText
 import com.rengwuxian.materialedittext.validation.METValidator
@@ -25,13 +26,17 @@ class EmailValidator(errorMessage: String) : METValidator(errorMessage) {
                 .isValid(text.toString())
         } else false
     }
+
     companion object {
 
         /** Создает проверку валидации для MaterialEditText
          * @param email MaterialEditText
          * @param context Context текущего view
          */
-        fun setValidateMaterialEditView(email: MaterialEditText, context: Context) {
+        fun setValidateMaterialEditView(
+            email: MaterialEditText,
+            context: Context,
+        ) {
             val validator =
                 EmailValidator(context.getString(R.string.email_error_message))
             email.addValidator(validator)
@@ -55,7 +60,12 @@ class EmailValidator(errorMessage: String) : METValidator(errorMessage) {
             })
         }
 
-        fun setValidateMaterialEditViewAndButton(email: MaterialEditText,button: Button, context: Context) {
+        fun setValidateMaterialEditViewAndButton(
+            email: MaterialEditText,
+            button: Button,
+            context: Context,
+            update: Boolean
+        ) {
             val validator =
                 EmailValidator(context.getString(R.string.email_error_message))
             email.addValidator(validator)
@@ -74,7 +84,10 @@ class EmailValidator(errorMessage: String) : METValidator(errorMessage) {
                 }
 
                 override fun afterTextChanged(s: Editable) {
-                    button.isEnabled = email.validate()
+                    if (update) {
+                        button.isEnabled =
+                            email.validate() && PetogramApplication.user!!.email != email.text.toString()
+                    } else button.isEnabled = email.validate()
 
                 }
             })

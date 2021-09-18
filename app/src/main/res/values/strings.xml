@@ -5,7 +5,7 @@
     <string name="non_account">Don’t have an account?</string>
     <string name="sing_up">Sing up</string>
     <string name="log_in">Log in</string>
-    <string name="email_error_message">Email is`t correct</string>
+    <string name="email_error_message">Email isn`t correct</string>
     <string name="password_error_message">Password must be between 6 and 24 characters</string>
     <string name="ok">OK</string>
     <string name="empty"> </string>
@@ -13,7 +13,7 @@
     <string name="restore">Restore</string>
     <string name="cancel">Cancel</string>
     <string name="not_registered">Account with this email has not registered</string>
-    <string name="wrong_password">Email or password is`t correct</string>
+    <string name="wrong_password">Email or password isn`t correct</string>
     <string name="password_changed_error">Password has been changed, please login again</string>
     <string name="message_password_restore_send">A restore message has been sent to your mail</string>
     <string name="acc_is_not_activate">Please confirm mail first. Follow the link in the letter that came to your mail</string>
@@ -29,4 +29,13 @@
     <string name="change_name">Change username</string>
     <string name="change_mail">Change email</string>
     <string name="change_avatar">Change avatar</string>
+    <string name="old_pass">Old password</string>
+    <string name="new_pass">New password</string>
+    <string name="avatar_changed">Avatar changed</string>
+    <string name="username_changed">Username changed</string>
+    <string name="password_changed">Password changed</string>
+    <string name="password_change_error">Old Password isn`t correct</string>
+    <string name="email_sended_for_change">Please go to your new email to confirm</string>
+    <string name="mail_exist">Email is Exist</string>
+    <string name="log_out">LogOut</string>
 </resources>

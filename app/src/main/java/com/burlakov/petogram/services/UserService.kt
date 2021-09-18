@@ -26,9 +26,24 @@ interface UserService {
     @Multipart
     @POST("/loadImageAndUsername")
     suspend fun loadImageAndUsername(
-        @Part("userId") userId : RequestBody,
-        @Part("username") username : RequestBody,
+        @Part("userId") userId: RequestBody,
+        @Part("username") username: RequestBody,
         @Part image: MultipartBody.Part
     ): Answer
 
+    @Multipart
+    @POST("/changeAvatar")
+    suspend fun changeAvatar(
+        @Part("userId") userId: RequestBody,
+        @Part image: MultipartBody.Part
+    ): Answer
+
+    @POST("/changeUsername")
+    suspend fun changeUsername(@Body user: User): Answer
+
+    @POST("/changePassword")
+    suspend fun changePassword(@Body user: User): Answer
+
+    @POST("/changeEmail")
+    suspend fun changeEmail(@Body user: User): Answer
 }
